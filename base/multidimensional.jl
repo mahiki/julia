@@ -1466,13 +1466,6 @@ end
 
 ## Permute array dims ##
 
-"""
-    permutedims(v::AbstractVector)
-
-Reshapes vector `v` into a `1 × length(v)` row matrix.
-"""
-permutedims(v::AbstractVector) = reshape(v, (1, length(v)))
-
 function permutedims(B::StridedArray, perm = (2,1))
     dimsB = size(B)
     ndimsB = length(dimsB)
@@ -1481,6 +1474,8 @@ function permutedims(B::StridedArray, perm = (2,1))
     P = similar(B, dimsP)
     permutedims!(P, B, perm)
 end
+
+permutedims(v::StridedVector) = reshape(v, (1, length(v))) # disambiguation
 
 function checkdims_perm(P::AbstractArray{TP,N}, B::AbstractArray{TB,N}, perm) where {TP,TB,N}
     indsB = indices(B)

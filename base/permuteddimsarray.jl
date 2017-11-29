@@ -114,6 +114,13 @@ function Base.permutedims(A::AbstractArray, perm = (2,1))
 end
 
 """
+    permutedims(v::AbstractVector)
+
+Reshape vector `v` into a `1 × length(v)` row matrix.
+"""
+permutedims(v::AbstractVector) = reshape(v, (1, length(v)))
+
+"""
     permutedims!(dest, src, perm)
 
 Permute the dimensions of array `src` and store the result in the array `dest`. `perm` is a
