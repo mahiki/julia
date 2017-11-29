@@ -1466,6 +1466,8 @@ end
 
 ## Permute array dims ##
 
+permutedims(v::AbstractVector) = reshape(v, (1, length(v)))
+
 function permutedims(B::StridedArray, perm = (2,1))
     dimsB = size(B)
     ndimsB = length(dimsB)
