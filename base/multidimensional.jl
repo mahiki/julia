@@ -1466,7 +1466,7 @@ end
 
 ## Permute array dims ##
 
-function permutedims(B::StridedArray, perm)
+function permutedims(B::StridedArray, perm = (2,1))
     dimsB = size(B)
     ndimsB = length(dimsB)
     (ndimsB == length(perm) && isperm(perm)) || throw(ArgumentError("no valid permutation of dimensions"))
@@ -1487,7 +1487,7 @@ function checkdims_perm(P::AbstractArray{TP,N}, B::AbstractArray{TB,N}, perm) wh
 end
 
 for (V, PT, BT) in [((:N,), BitArray, BitArray), ((:T,:N), Array, StridedArray)]
-    @eval @generated function permutedims!(P::$PT{$(V...)}, B::$BT{$(V...)}, perm) where $(V...)
+    @eval @generated function permutedims!(P::$PT{$(V...)}, B::$BT{$(V...)}, perm = (2,1)) where $(V...)
         quote
             checkdims_perm(P, B, perm)
 
