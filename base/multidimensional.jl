@@ -1466,6 +1466,11 @@ end
 
 ## Permute array dims ##
 
+"""
+    permutedims(v::AbstractVector)
+
+Reshapes vector `v` into a `1 × length(v)` row matrix.
+"""
 permutedims(v::AbstractVector) = reshape(v, (1, length(v)))
 
 function permutedims(B::StridedArray, perm = (2,1))
